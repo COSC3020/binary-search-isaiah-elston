@@ -21,13 +21,13 @@ function binarySearch(list, element) {
 
     do {
         let middleIndex = Math.floor(leftBound + ((rightBound - leftBound) / 2));
-        if (list[middleIndex] == element) {
-            if (list[leftBound] == list[middleIndex]) {
-                return leftBound;
-            } else {
-                return middleIndex;
-            }
-        } else if (list[middleIndex] > element) {
+        if (list[middleIndex] == element && 
+            list[middleIndex] !== list[leftBound]) {
+            return middleIndex;
+        } else if (list[middleIndex] == element &&
+                   list[middleIndex] == list[leftBound]) {
+                    return leftBound;
+        }else if (list[middleIndex] > element) {
             rightBound = middleIndex--;
         } else if (list[middleIndex] < element) {
             leftBound = middleIndex++;
