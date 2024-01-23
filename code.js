@@ -15,24 +15,27 @@ For Math.floor()
 https://stackoverflow.com/questions/4228356/how-to-perform-an-integer-division-and-separately-get-the-remainder-in-javascr
 */
 
-function binarySearch(list, element) {
-    let leftBound = 0;
-    let rightBound = list.length;
 
-    do {
-        let middleIndex = Math.floor(leftBound + ((rightBound - leftBound) / 2));
-        if (list[middleIndex] == element && 
-            list[middleIndex] !== list[leftBound]) {
-            return middleIndex;
-        } else if (list[middleIndex] == element &&
-                   list[middleIndex] == list[leftBound]) {
-                    return leftBound;
-        }else if (list[middleIndex] > element) {
-            rightBound = middleIndex--;
-        } else if (list[middleIndex] < element) {
-            leftBound = middleIndex++;
-        } else {
-            return -1;
-        }
-    } while (rightBound >= 1);
+
+function binarySearch(list, element) {
+    let middleIndex = Math.floor(list.length / 2);
+
+    if (list.length < 1 || 
+        list[list.length - 1] < element || 
+        list[0] > element || 
+        (list.length == 1 && list[0] !== element)) {
+        return -1;
+    }
+
+    else if (list[middleIndex] == element) {
+        return middleIndex;
+    }
+
+    else if (list[middleIndex] > element) {
+        return binarySearch(list.slice(0, middleIndex--), element);
+    }
+
+    else if (list[middleIndex] < element) {
+        return binarySearch(list.slice(middleIndex++, list.length), element) + middleIndex;
+    }
 }
