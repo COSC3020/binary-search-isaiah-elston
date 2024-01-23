@@ -27,6 +27,11 @@ function binarySearch(list, element) {
         return -1;
     }
 
+    else if (list[middleIndex] == list[0] && 
+             list[middleIndex] == element) {
+        return 0;
+    }
+
     else if (list[middleIndex] == element) {
         return middleIndex;
     }
@@ -39,3 +44,7 @@ function binarySearch(list, element) {
         return binarySearch(list.slice(middleIndex++, list.length), element) + middleIndex;
     }
 }
+
+let testList = [5, 5]
+
+console.log(binarySearch(testList, 5))
